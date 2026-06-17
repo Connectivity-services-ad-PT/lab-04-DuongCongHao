@@ -161,16 +161,13 @@ def health() -> HealthResponse:
 )
 async def create_reading(
     request: Request, 
-    payload: SensorReadingCreate,  # Trả payload về tham số chuẩn để FastAPI tự động bắt lỗi dữ liệu đầu vào và trả về 422
+    payload: SensorReadingCreate, 
     response: Response
-) -> Response:
-    # 1. Xác thực Auth trước bằng Request
+):
     auth_error = check_authentication(request)
     if auth_error:
         return auth_error
 
-    # 2. Nếu đi đến đây, dữ liệu 'payload' đã được FastAPI tự động kiểm tra (validate) thành công.
-    # Logic kiểm tra cảnh báo nhiệt độ cao
     if payload.metric == SensorMetric.temperature and payload.value >= 70:
         response.headers["X-Warning"] = "high-temperature"
 
