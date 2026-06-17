@@ -142,7 +142,8 @@ def next_reading_id() -> str:
     today = datetime.now(timezone.utc).strftime("%Y%m%d")
     return f"R-{today}-{len(READINGS) + 1:04d}"
 
-@app.get("/health", response_model=HealthResponse)
+# Sửa đổi tại đây: thêm methods=["GET", "HEAD"]
+@app.get("/health", response_model=HealthResponse, methods=["GET", "HEAD"])
 def health() -> HealthResponse:
     return HealthResponse(
         status="ok",
