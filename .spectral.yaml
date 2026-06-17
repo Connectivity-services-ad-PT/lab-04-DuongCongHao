@@ -1,0 +1,7 @@
+extends: [[spectral:oas, recommended]] # Hoặc "spectral:oas" tùy theo template bài lab
+
+rules:
+  # Nếu bạn có tùy chỉnh luật ở đây, đảm bảo giá trị cấu hình phải là một trong các từ khóa: error, warn, info, hint, hoặc off.
+  # Ví dụ:
+  operation-description: error
+  info-contact: warn
