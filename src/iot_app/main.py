@@ -143,14 +143,18 @@ def next_reading_id() -> str:
     return f"R-{today}-{len(READINGS) + 1:04d}"
 
 # Sửa đổi tại đây: thêm methods=["GET", "HEAD"]
-@app.get("/health", response_model=HealthResponse, methods=["GET", "HEAD"])
+# Sửa từ @app.get thành @app.api_route
+@app.api_route(
+    "/health", 
+    methods=["GET", "HEAD"], 
+    response_model=HealthResponse
+)
 def health() -> HealthResponse:
     return HealthResponse(
         status="ok",
         service=SERVICE_NAME,
         version=SERVICE_VERSION,
     )
-
 @app.post(
     "/readings",
     response_model=SensorReadingCreated,
